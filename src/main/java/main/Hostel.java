@@ -5,6 +5,8 @@ import static org.junit.Assert.assertEquals;
 import java.io.*;
 import java.util.*;
 
+import org.junit.Test;
+
 public class Hostel{
 	   public static void writedata()throws IOException {
 		   BufferedWriter out = null;
@@ -41,16 +43,25 @@ public class Hostel{
 		               String checkName = splited[0];
 		               //write your code here !!!
 //		               compare check name with name and return true if present and false if not
+		              if(splited[0].equals(name)) {
+		            	  return true;
+		              }
 	               }
 	               
-	               
-	            }catch(Exception e){
+	            }
+		   catch(Exception e){
 	                System.out.println(e);
 	            }
-			return true;
+			return false;
 	   }
        public static void allotHostel(){
     	   //write your code here!!!
+    	   try {
+    		   writedata();
+    		   
+    	   }catch(IOException e) {
+    		   System.out.println(e);
+    	   }
     	   
        }
 
@@ -76,6 +87,7 @@ public class Hostel{
     	   boolean chk = true;
     	   
     	   //write your code here
+    	   chk = readData(name);
     	   
     	   return chk;
         }
@@ -130,4 +142,39 @@ public class Hostel{
         }
        allotHostel();
     }
+    Hostel h ;
+	@SuppressWarnings("static-access")
+	@Test
+	public void studentNameTest() throws IOException {
+		boolean chk = true;
+		h	= new Hostel();
+		
+		BufferedWriter out = new BufferedWriter(new FileWriter("hostel.txt",true));
+//		assertEquals(false,h.verifyName("test rNo"));
+		
+			try{
+				out.write("tekjhgfdsst rNo");
+				out.newLine();
+	           }catch(Exception e){
+	               //print
+	               System.out.println(e);
+	               
+	           }finally{
+	               out.close();
+	           }
+		
+		
+		assertEquals(true,h.verifyName("tekjhgfdsst"));
+		
+		
+		
+		
+//		fail("Not yet implemented");
+	}
+	@SuppressWarnings("static-access")
+	@Test
+	public void studentDuplicacyTest() throws IOException{
+//		boolean chk = true;
+		assertEquals(false,h.verifyName("abcdef"));
+	}
 }
